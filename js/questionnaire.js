@@ -349,7 +349,7 @@ var triangle = {
 };
 var triangle_values = [4, 2, 3, 3, 5];
 
-//MARK: Reordered frats, now alphabetized
+
 // ARRAY OF EACH OF THE FRAT'S QUESIONNAIRE VALUES
 var frat_values = [
   alpha_epsilon_pi_values,
@@ -388,13 +388,10 @@ var frats = [
   triangle
 ];
 
-//MARK: edits begin, ends at the bottom of this file
-
-//MARK: pulls profile string from localStorage and converts to array of profile objects
 var profiles = JSON.parse(localStorage.getItem("profiles")) || [];
-//MARK: pulls current user from localStorage
+
 var current_user = localStorage.getItem("current_user");
-//MARK: creates empty match array
+
 var user_matches = [];
 
 function findTopThreeFrats() {
@@ -411,51 +408,43 @@ function findTopThreeFrats() {
 
     var diff_decimal = total / total_deviation;
     var match_decimal = 1 - diff_decimal;
-    //MARK: added Math.round to round off match percents
+
     var match_percent = Math.round(match_decimal * percent);
 
-    //MARK: store each fratName, matchPercent, and homepage as an object and push into user_matches array
     var frat_match = {fratName: frats[index].name, matchPercent: match_percent, homepage: frats[index].homepage};
     user_matches.push(frat_match);
   }
-  //MARK: sorts matches by percentage
+
   var sorted_matches = user_matches.sort(Comparator);
 
-  //MARK: replace user's matches array with sorted questionnaire results
   for (var user in profiles) {
     if (current_user == profiles[user].email) {
       profiles[user].matches = sorted_matches;
     }
   }
 
-  //MARK: store updated user profiles into localStorage
   localStorage.setItem("profiles", JSON.stringify(profiles));
 }
 
-//MARK: compare match percentages
 function Comparator(a, b) {
   if (a.matchPercent > b.matchPercent) return -1;
   if (a.matchPercent < b.matchPercent) return 1;
   return 0;
 }
 
-//MARK: enclosed top 3 results in showResults function
 function showResults() {
-/* MATCHES PAGE JS */
 // LOCAL VARIABLE TO DISPLAY TOP 3 FRATS AND HANDLE MAGIC NUMBER
 var org_name_1 = $('#temp'), container
 var top_3 = 3;
-//MARK: added resultsPage array to store user's matches
+
 var resultsPage = [];
 
-//MARK: accesses profiles (global var) and pulls user's matches, stores in resultsPage
 for (user in profiles) {
   if (current_user == profiles[user].email) {
     resultsPage = profiles[user].matches;
   }
 }
 
-//MARK: added if/else statement to cover scenario where user did not fill out survey
 if (resultsPage.length == 0) {
   container = $('<div id="no_results" class="container"></div>');
 
@@ -474,7 +463,6 @@ for (var index = 0; index < top_3; index++) {
     org_name_1.append(container);
 
     // APPEND FRAT NAME AND MATCH PERCENTAGE TO CONTAINER TO BE DISPLAYED ON MATCHES PAGE
-    //MARK: changed what to call to get correct variables
     container.append('<div class="name">' + resultsPage[index].fratName +'</div>');
     container.append('<div class="match_percentage">' + "Match Percentage: " + resultsPage[index].matchPercent + "%" + '</div>');
     container.append('<a href="' + resultsPage[index].homepage + '"> Visit Fraternity Page' + '</a>');
@@ -482,33 +470,38 @@ for (var index = 0; index < top_3; index++) {
 }
 }
 
-//MARK: enclosed Explore results in showAll function
+
 function showAll() {
-  //MARK: created resultsPage to store user's matches
+
   var resultsPage = [];
-  //MARK: search user's matches in profiles and store in resultsPage
+
   for (user in profiles) {
     if (current_user == profiles[user].email) {
       resultsPage = profiles[user].matches;
     }
   }
-/* EXPLORE PAGE JS */
-// LOCAL VARIABLE TO DISPLAY ALL FRATS AND HANDLE MAGIC NUMBER
+  /* EXPLORE PAGE JS */
+  // LOCAL VARIABLE TO DISPLAY ALL FRATS AND HANDLE MAGIC NUMBER
   var org_name_2 = $('#explore'), container;
+  //MARK: enclosed explore in if/else statement to cover if user clicks 'Explore' prior to taking questionnaire
+  if (resultsPage.length == 0) {
+    container = $('<div id="no_results" class="container"></div>');
 
-// LOOP TO DISPLAY ALL FRATS
-  for (var index = 0; index < frats.length; index++) {
-    // CREATE CONTAINER IN HTML
-    container = $('<div id="frat_2" class="container"></div>');
-
-    // APPEND CONTAINER TO ORG_NAME_2, WHICH DEALS WITH THE 'EXPLORE' ID
     org_name_2.append(container);
+    container.append('<p>Please take the questionnaire to get matched.</p>');
 
-    // APPEND FRAT NAME AND MATCH PERCENTAGE TO CONTAINER TO BE DISPLAYED ON EXPLORE PAGE
-    //MARK: changed what to call to get correct variables
-    container.append('<div class="name">' + resultsPage[index].fratName +'</div>');
-    container.append('<div class="match_percentage">' + "Match Percentage: " + resultsPage[index].matchPercent + "%" + '</div>');
-    //MARK: updated filepath of links
-    container.append('<a href="' + resultsPage[index].homepage + '"> Visit Fraternity Page' + '</a>');
+  } else {
+
+    for (var index = 0; index < frats.length; index++) {
+
+      container = $('<div id="frat_2" class="container"></div>');
+
+      org_name_2.append(container);
+
+      container.append('<div class="name">' + resultsPage[index].fratName +'</div>');
+      container.append('<div class="match_percentage">' + "Match Percentage: " + resultsPage[index].matchPercent + "%" + '</div>');
+
+      container.append('<a href="' + resultsPage[index].homepage + '"> Visit Fraternity Page' + '</a>');
+    }
   }
 }
