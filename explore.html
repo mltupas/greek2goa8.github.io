@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
-  <!-- NOTE: Menu & Back Buttons moved outside of body -->
   <div id="main">
     <button class="openbtn" onclick="openNav()">☰ Menu</button>
     <button class="openbtn" onclick="goBack()">Go Back</button>
   </div>
-
-  <body>
+  <!-- NOTE: MARK - added onload="showAll()" in <body> -->
+  <body onload="showAll()">
 
     <div class="container">
       <h1>Explore</h1>
@@ -32,7 +31,7 @@
       </div>
 
       <hr>
-      
+
       <div id="explore"></div>
 
       <form action="events.html">
@@ -45,7 +44,7 @@
 <!--       <form action="events.html">
         <input type="submit" value="Return to Home Page"></input>
       </form>
- -->    
+ -->
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>

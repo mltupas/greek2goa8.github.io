@@ -8,6 +8,18 @@ for (var user in profiles) {
     events_to_display = profiles[user].events;
   }
 }
+//MARK: disable delete event button if there are no events to display
+var btn = document.getElementById("delete_event");
+var prev = document.getElementById("prev");
+var next = document.getElementById("next");
+
+if (events_to_display.length <= 1) {
+  if (events_to_display.length == 0) {
+    btn.style.display = "none";
+  }
+  prev.style.display = "none";
+  next.style.display = "none";
+}
 
 //SORT CAROUSEL EVENTS
 var sort_events = events_to_display.sort(function(a, b) {return b - a});
@@ -31,12 +43,14 @@ function comparator(a, b) {
 }
 
 if (events_to_display.length == 0) {
-  container = $('<div id="mySlides" class="carousel_container"></div>');
+  //MARK: changed default pic to Greek2Go logo, added "Take Questionnaire" button
+  container = $('<div id="mySlides" class="carousel_container" id="default_pic"></div>');
   events_carousel.append(container);
 
-  container.append('<img src="images/stopbanner.png" style=width"100%">');
+  container.append('<img src="images/greek2gofinalfinal.png" style=height"100%" width="auto">');
   container.append('<div class="text">');
-  container.append('<h2>You have no events. Add events by checking the Explore page or taking the questionnaire, both of which can be found in Menu.</h2>');
+  container.append('<h2>You have no events. Click on Take Questionnaire to see which Greek organizations best align with your personal attributes.</h2>');
+  container.append('<form action="questionnaire.html"><button type="submit" class="questionnairebtn">Take Questionnaire</button></form>');
 
 } else {
 
@@ -63,6 +77,7 @@ if (events_to_display.length == 0) {
 }
 
 function deleteEvent() {
+
   var slides = document.getElementsByClassName("carousel_container");
 
   for (var index = 0; index < slides.length; index++) {

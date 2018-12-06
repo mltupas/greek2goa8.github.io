@@ -446,3 +446,9 @@ div .sidelogo{
   width: 250px;
   height: 123px;
 }
+
+/* NOTE: MARK - set width of input fields for signup */
+#first_name, #last_name, #new_email, #new_pswd, #pswd_check {
+	width: 30%;
+	margin: 0px;
+}

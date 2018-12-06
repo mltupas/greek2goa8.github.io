@@ -49,7 +49,7 @@ container_2.append('<span id="val_2">' + "Current Athletics Value: " + athletics
 $('.athletics-number-button').on('click',function() {
     // get the button that was clicked
     var buttonClicked = $(this).html();
-    
+
     // store button value into athletics_value
     athletics_value = buttonClicked;
     console.log("Athletics: " + athletics_value);
@@ -80,7 +80,7 @@ container_3.append('<span id="val_3">' + "Current Leadership Value: " + leadersh
 $('.leadership-number-button').on('click',function() {
     // get the button that was clicked
     var buttonClicked = $(this).html();
-    
+
     // store button value into leadership_value
     leadership_value = buttonClicked;
     console.log("Leadership: " + leadership_value);
@@ -111,7 +111,7 @@ container_4.append('<span id="val_4">' + "Current Social Value: " + social_value
 $('.social-number-button').on('click',function() {
     // get the button that was clicked
     var buttonClicked = $(this).html();
-    
+
     // store button value into social_value
     social_value = buttonClicked;
     console.log("Social: " + social_value);
@@ -119,7 +119,7 @@ $('.social-number-button').on('click',function() {
     // update value
     document.getElementById("val_4").textContent="Current Social Value: " + social_value;
 
-    didChooseAllValues();    
+    didChooseAllValues();
 });
 
 
@@ -142,7 +142,7 @@ container_5.append('<span id="val_5">' + "Current Philanthropy Value: " + philan
 $('.philanthropy-number-button').on('click',function() {
     // get the button that was clicked
     var buttonClicked = $(this).html();
-    
+
     // store button value into philanthropy_value
     philanthropy_value = buttonClicked;
     console.log("Philanthropy: " + philanthropy_value);
@@ -153,10 +153,21 @@ $('.philanthropy-number-button').on('click',function() {
     didChooseAllValues();
 });
 
+function didChooseAllValues() {
 
-/* VARIABLES TO STORE DUMMY DATA FOR FIVE FRATS */
-// LOCALSTORAGE OBJECT
-myStorage = window.localStorage;
+    var empty = false;
+    if (academics_value == 0 || athletics_value == 0 || leadership_value == 0 || social_value == 0 || philanthropy_value == 0) {
+        empty = true;
+    }
+
+    if (empty) {
+        $('.submitbtn').attr('disabled', 'disabled');
+    } else {
+        $('.submitbtn').removeAttr('disabled');
+    }
+
+    console.log("Did I forget to pick a value for at least one attribute? " + empty);
+}
 
 // ALPHA EPSILON PI
 var alpha_epsilon_pi = {
@@ -226,7 +237,7 @@ var alpha_lambda_mu = {
     leadership_value: 5,
     social_value: 5,
     philanthropy_value: 3,
-    homepage: "fratpage/Alpha Lambda Mu.html"    
+    homepage: "fratpage/Alpha Lambda Mu.html"
 };
 var alpha_lambda_mu_values = [1, 2, 5, 5, 3];
 
@@ -238,7 +249,7 @@ var lambda_chi_alpha = {
     leadership_value: 5,
     social_value: 5,
     philanthropy_value: 2,
-    homepage: "fratpage/Lambda Chi Alpha.html"    
+    homepage: "fratpage/Lambda Chi Alpha.html"
 };
 var lambda_chi_alpha_values = [4, 4, 5, 5, 2];
 
@@ -250,7 +261,7 @@ var phi_gamma_delta = {
     leadership_value: 1,
     social_value: 4,
     philanthropy_value: 3,
-    homepage: "fratpage/Phi Gamma Delta.html"    
+    homepage: "fratpage/Phi Gamma Delta.html"
 };
 var phi_gamma_delta_values = [2, 5, 1, 4, 3];
 
@@ -262,7 +273,7 @@ var pi_kappa_alpha = {
     leadership_value: 1,
     social_value: 5,
     philanthropy_value: 1,
-    homepage: "fratpage/Pi Kappa Alpha.html"    
+    homepage: "fratpage/Pi Kappa Alpha.html"
 };
 var pi_kappa_alpha_values = [2, 5, 1, 5, 1];
 
@@ -274,7 +285,7 @@ var sigma_alpha_epsilon = {
     leadership_value: 3,
     social_value: 2,
     philanthropy_value: 4,
-    homepage: "fratpage/Sigma Alpha Epsilon.html"    
+    homepage: "fratpage/Sigma Alpha Epsilon.html"
 };
 var sigma_alpha_epsilon_values = [5, 5, 3, 2, 4];
 
@@ -286,7 +297,7 @@ var sigma_alpha_mu = {
     leadership_value: 4,
     social_value: 2,
     philanthropy_value: 1,
-    homepage: "fratpage/Sigma Alpha Mu.html"    
+    homepage: "fratpage/Sigma Alpha Mu.html"
 };
 var sigma_alpha_mu_values = [3, 4, 4, 2, 1];
 
@@ -298,7 +309,7 @@ var sigma_nu = {
     leadership_value: 5,
     social_value: 4,
     philanthropy_value: 5,
-    homepage: "fratpage/Sigma Nu.html"    
+    homepage: "fratpage/Sigma Nu.html"
 };
 var sigma_nu_values = [3, 1, 5, 4, 5];
 
@@ -310,7 +321,7 @@ var sigma_phi_epsilon = {
     leadership_value: 1,
     social_value: 4,
     philanthropy_value: 2,
-    homepage: "fratpage/Sigma Phi Epsilon.html"    
+    homepage: "fratpage/Sigma Phi Epsilon.html"
 };
 var sigma_phi_epsilon_values = [1, 2, 1, 4, 2];
 
@@ -322,7 +333,7 @@ var tau_kappa_epsilon = {
     leadership_value: 2,
     social_value: 1,
     philanthropy_value: 5,
-    homepage: "fratpage/Tau Kappa Epsilon.html"    
+    homepage: "fratpage/Tau Kappa Epsilon.html"
 };
 var tau_kappa_epsilon_values = [1, 1, 2, 1, 5];
 
@@ -334,23 +345,24 @@ var triangle = {
     leadership_value: 3,
     social_value: 3,
     philanthropy_value: 5,
-    homepage: "fratpage/Triangle.html"    
+    homepage: "fratpage/Triangle.html"
 };
 var triangle_values = [4, 2, 3, 3, 5];
 
+//MARK: Reordered frats, now alphabetized
 // ARRAY OF EACH OF THE FRAT'S QUESIONNAIRE VALUES
 var frat_values = [
   alpha_epsilon_pi_values,
-  sigma_chi_values,
-  phi_delta_theta_values,
-  kappa_sigma_values,
-  beta_theta_pi_values,
   alpha_lambda_mu_values,
+  beta_theta_pi_values,
+  kappa_sigma_values,
   lambda_chi_alpha_values,
+  phi_delta_theta_values,
   phi_gamma_delta_values,
   pi_kappa_alpha_values,
   sigma_alpha_epsilon_values,
   sigma_alpha_mu_values,
+  sigma_chi_values,
   sigma_nu_values,
   sigma_phi_epsilon_values,
   tau_kappa_epsilon_values,
@@ -360,126 +372,99 @@ var frat_values = [
 // ARRAY OF EACH OF THE FRAT OBJECTS
 var frats = [
   alpha_epsilon_pi,
-  sigma_chi,
-  phi_delta_theta,
-  kappa_sigma,
-  beta_theta_pi,
   alpha_lambda_mu,
+  beta_theta_pi,
+  kappa_sigma,
   lambda_chi_alpha,
+  phi_delta_theta,
   phi_gamma_delta,
   pi_kappa_alpha,
   sigma_alpha_epsilon,
   sigma_alpha_mu,
+  sigma_chi,
   sigma_nu,
   sigma_phi_epsilon,
   tau_kappa_epsilon,
   triangle
 ];
 
+//MARK: edits begin, ends at the bottom of this file
 
-// LOCAL VARIABLES TO HELP WITH FINDING THE TOP 3 FRATS
-var keys = [];
-var values = [];
-var frats_to_values = [];
+//MARK: pulls profile string from localStorage and converts to array of profile objects
+var profiles = JSON.parse(localStorage.getItem("profiles")) || [];
+//MARK: pulls current user from localStorage
+var current_user = localStorage.getItem("current_user");
+//MARK: creates empty match array
+var user_matches = [];
 
-// FUNCTION TO CALCULATE MATCH PERCENTAGE FOR EACH FRAT TO FIND TOP 3 FRATS
 function findTopThreeFrats() {
+  var total_deviation = 20;
+  var percent = 100;
+  var user_values = [academics_value, athletics_value, leadership_value, social_value, philanthropy_value];
 
-    // LOCAL VARIABLES TO STORE TOTAL POSSIBLE DIFFERENCE AND MULTIPLY DECIMAL TO PERCENTAGE
-    var total_deviation = 20;
-    var percent = 100;
+  for (index = 0; index < frats.length; index++) {
+    var total = 0;
 
-    // ARRAY OF EACH OF THE USER'S VALUE, WHICH IS USED TO CALCULATE MATCH PERCENTAGE
-    var user_values = [academics_value, athletics_value, leadership_value, social_value, philanthropy_value];
-
-    // LOOP THROUGH EACH FRAT TO CALCULATE MATCH PERCENTAGE WITH EACH FRAT
-    for (index = 0; index < frats.length; index++) {
-
-        // LOCAL VARIABLE TO STORE TOTAL DIFFERENCE VALUE
-        var total = 0;
-
-        // LOOP THROUGH EACH VALUE OF CURRENT FRAT TO FIND TOTAL DIFFERENCE VALUE
-        for (num = 0; num < user_values.length; num++) {
-            total += Math.abs(user_values[num] - frat_values[index][num]);
-            console.log(user_values[num]);
-            console.log(frat_values[index][num]);
-        }
-
-        // CALCULATE MATCH PERCENTAGE
-        var diff_decimal = total / total_deviation;
-        var match_decimal = 1 - diff_decimal;
-        var match_percent = match_decimal * percent;
-
-        // STORE FRAT NAME AS KEY AND MATCH PERCENTAGE AS VALUE INTO LOCALSTORAGE
-        myStorage.setItem(frats[index].name, match_percent);
+    for (num = 0; num <user_values.length; num++) {
+      total += Math.abs(user_values[num] - frat_values[index][num]);
     }
+
+    var diff_decimal = total / total_deviation;
+    var match_decimal = 1 - diff_decimal;
+    //MARK: added Math.round to round off match percents
+    var match_percent = Math.round(match_decimal * percent);
+
+    //MARK: store each fratName, matchPercent, and homepage as an object and push into user_matches array
+    var frat_match = {fratName: frats[index].name, matchPercent: match_percent, homepage: frats[index].homepage};
+    user_matches.push(frat_match);
+  }
+  //MARK: sorts matches by percentage
+  var sorted_matches = user_matches.sort(Comparator);
+
+  //MARK: replace user's matches array with sorted questionnaire results
+  for (var user in profiles) {
+    if (current_user == profiles[user].email) {
+      profiles[user].matches = sorted_matches;
+    }
+  }
+
+  //MARK: store updated user profiles into localStorage
+  localStorage.setItem("profiles", JSON.stringify(profiles));
 }
 
-// COMPARATOR FUNCTION TO COMPARE MATCH PERCENTAGES TO HELP FIND TOP 3 FRATS
+//MARK: compare match percentages
 function Comparator(a, b) {
-    if (a[1] > b[1]) return -1;
-    if (a[1] < b[1]) return 1;
-    return 0;
+  if (a.matchPercent > b.matchPercent) return -1;
+  if (a.matchPercent < b.matchPercent) return 1;
+  return 0;
 }
 
-// LOCAL VARIABLE TO HELP ITERATE THROUGH EACH ENTRY IN LOCALSTORAGE
-var index = 0;
-
-// LOOP THROUGH EACH KEY IN LOCALSTORAGE
-for (var key in myStorage) {
-
-    // PUSH MATCH PERCENTAGE AS AN INT VALUE INTO VALUES ARRAY
-    values.push(parseInt(myStorage.getItem(key), 10));
-
-    // PUSH ARRAY WITH FRAT NAME AND MATCH PERCENTAGE AS AN INT VALUE INTO FRATS_TO_VALUES ARRAY
-    frats_to_values.push([myStorage.key(index), parseInt(myStorage.getItem(key), 10) ]);
-
-    // INCREMENT INDEX TO ACCESS NEXT ENTRY IN LOCALSTORAGE
-    index++;
-}
-
-// SORT VALUES ARRAY BY DECREASING MATCH PERCENTAGE
-var sorted_values = values.sort(function(a, b) {return b - a});
-
-// SORT FRATS_TO_VALUES ARRAY BY DECREASING MATCH PERCENTAGE
-var sorted_frats_to_values = frats_to_values.sort(Comparator);
-
-// FUNCTION TO HELP SORT FRATS
-function sortFrats() {
-    for (var i = 0; i < myStorage.length; i++) {
-        var key = myStorage.key(i);
-        var value = myStorage[key];
-        if(value.equals(desired_value)) {
-            console.log(key + " => " + value);
-        }
-    }
-}
-
-
-
-// FUNCTION TO CHECK IF ANY ATTRIBUTE VALUE IS ZERO
-function didChooseAllValues() {
-
-    var empty = false;
-    if (academics_value == 0 || athletics_value == 0 || leadership_value == 0 || social_value == 0 || philanthropy_value == 0) {
-        empty = true;
-    }
-
-    if (empty) {
-        $('.submitbtn').attr('disabled', 'disabled');
-    } else {
-        $('.submitbtn').removeAttr('disabled');
-    }
-
-    console.log("Did I forget to pick a value for at least one attribute? " + empty);
-}
-
-
+//MARK: enclosed top 3 results in showResults function
+function showResults() {
 /* MATCHES PAGE JS */
 // LOCAL VARIABLE TO DISPLAY TOP 3 FRATS AND HANDLE MAGIC NUMBER
-var org_name_1 = $('#temp'), container;
+var org_name_1 = $('#temp'), container
 var top_3 = 3;
+//MARK: added resultsPage array to store user's matches
+var resultsPage = [];
 
+//MARK: accesses profiles (global var) and pulls user's matches, stores in resultsPage
+for (user in profiles) {
+  if (current_user == profiles[user].email) {
+    resultsPage = profiles[user].matches;
+  }
+}
+
+//MARK: added if/else statement to cover scenario where user did not fill out survey
+if (resultsPage.length == 0) {
+  container = $('<div id="no_results" class="container"></div>');
+
+  // APPEND CONTAINER TO ORG_NAME_1, WHICH DEALS WITH THE 'TEMP' ID
+  org_name_1.append(container);
+
+  // APPEND FRAT NAME AND MATCH PERCENTAGE TO CONTAINER TO BE DISPLAYED ON MATCHES PAGE
+  container.append('<p>Please take the questionnaire to get matched.</p>');
+} else {
 // LOOP TO DISPLAY TOP 3 FRATS
 for (var index = 0; index < top_3; index++) {
     // CREATE CONTAINER IN HTML
@@ -489,19 +474,30 @@ for (var index = 0; index < top_3; index++) {
     org_name_1.append(container);
 
     // APPEND FRAT NAME AND MATCH PERCENTAGE TO CONTAINER TO BE DISPLAYED ON MATCHES PAGE
-    container.append('<div class="name">' + frats_to_values[index][0] +'</div>');
-    container.append('<div class="match_percentage">' + "Match Percentage: " + frats_to_values[index][1] + "%" + '</div>');
-    container.append('<a href="fratpage/' + frats_to_values[index][0] + '.html"> Visit Fraternity Page' + '</a>');    
+    //MARK: changed what to call to get correct variables
+    container.append('<div class="name">' + resultsPage[index].fratName +'</div>');
+    container.append('<div class="match_percentage">' + "Match Percentage: " + resultsPage[index].matchPercent + "%" + '</div>');
+    container.append('<a href="' + resultsPage[index].homepage + '"> Visit Fraternity Page' + '</a>');
+  }
+}
 }
 
-
-
+//MARK: enclosed Explore results in showAll function
+function showAll() {
+  //MARK: created resultsPage to store user's matches
+  var resultsPage = [];
+  //MARK: search user's matches in profiles and store in resultsPage
+  for (user in profiles) {
+    if (current_user == profiles[user].email) {
+      resultsPage = profiles[user].matches;
+    }
+  }
 /* EXPLORE PAGE JS */
 // LOCAL VARIABLE TO DISPLAY ALL FRATS AND HANDLE MAGIC NUMBER
-var org_name_2 = $('#explore'), container;
+  var org_name_2 = $('#explore'), container;
 
 // LOOP TO DISPLAY ALL FRATS
-for (var index = 0; index < frats.length; index++) {
+  for (var index = 0; index < frats.length; index++) {
     // CREATE CONTAINER IN HTML
     container = $('<div id="frat_2" class="container"></div>');
 
@@ -509,7 +505,10 @@ for (var index = 0; index < frats.length; index++) {
     org_name_2.append(container);
 
     // APPEND FRAT NAME AND MATCH PERCENTAGE TO CONTAINER TO BE DISPLAYED ON EXPLORE PAGE
-    container.append('<div class="name">' + frats_to_values[index][0] +'</div>');
-    container.append('<div class="match_percentage">' + "Match Percentage: " + frats_to_values[index][1] + "%" + '</div>');
-    container.append('<a href="fratpage/' + frats_to_values[index][0] + '.html"> Visit Fraternity Page' + '</a>');    
+    //MARK: changed what to call to get correct variables
+    container.append('<div class="name">' + resultsPage[index].fratName +'</div>');
+    container.append('<div class="match_percentage">' + "Match Percentage: " + resultsPage[index].matchPercent + "%" + '</div>');
+    //MARK: updated filepath of links
+    container.append('<a href="' + resultsPage[index].homepage + '"> Visit Fraternity Page' + '</a>');
+  }
 }

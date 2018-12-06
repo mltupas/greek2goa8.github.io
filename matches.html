@@ -14,14 +14,14 @@
     <button class="openbtn" onclick="openNav()">☰ Menu</button>
     <button class="openbtn" onclick="goBack()">Go Back</button>
   </div>
-
-  <body>
+<!-- NOTE: MARK - added onload="showResults()" in <body> -->
+  <body onload="showResults()">
     <div class="container">
       <h1>Matches</h1>
       <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="events.html"><i class="fa fa-fw fa-home"></i>Home</a>
-<!--         
+<!--
         <a href="profile.html"><i class="fa fa-fw fa-user-circle-o"></i>Profile</a>
 -->
         <a href="explore.html"><i class="fa fa-fw fa-search"></i>Explore</a>
