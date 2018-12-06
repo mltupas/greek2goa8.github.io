@@ -452,3 +452,13 @@ div .sidelogo{
 	width: 30%;
 	margin: 0px;
 }
+
+/*NOTE: Mark - changed width of frat descriptions */
+.frat_desc {
+	width: 60%;
+	margin: auto;
+}
+
+hr {
+	width: 80%;
+}
